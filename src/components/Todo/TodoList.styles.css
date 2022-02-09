@@ -1,0 +1,55 @@
+/* NAME.scss */
+.todoListContainer {
+  font-family: Iceland, sans-serif;
+}
+.todoListContainer .todoInput {
+  font-family: Iceland, sans-serif;
+  font-size: 2.2rem;
+  width: 100%;
+  padding: 10px 18px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+.todoListContainer .todoInput:focus {
+  outline: 0;
+}
+.todoListContainer h1 {
+  color: chocolate;
+}
+.todoListContainer .indexColor {
+  color: cornflowerblue;
+}
+.todoListContainer .todoItem {
+  mso-grid-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.todoListContainer .removeItem {
+  cursor: pointer;
+  font-size: 2.7rem;
+  margin-left: 14px;
+  color: red;
+}
+.todoListContainer .removeItem:hover {
+  color: black;
+}
+.todoListContainer .removeItem:active {
+  transition: all 0.2s ease-in-out;
+  opacity: 0.15;
+}
+.todoListContainer .todoItemEdit {
+  font-size: 1.6rem;
+  color: #2c3e50;
+  margin-left: 20px;
+  width: 190%;
+  padding: 10px 0 10px 0;
+  border: 1px solid #ccc;
+  font-family: Iceland, sans-serif;
+  cursor: pointer;
+}
+.todoListContainer:focus {
+  outline: none;
+}
+
+/*# sourceMappingURL=TodoList.styles.css.map */
