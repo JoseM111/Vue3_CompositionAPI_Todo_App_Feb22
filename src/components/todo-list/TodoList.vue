@@ -24,7 +24,8 @@ const {
 	newTodo, removeTodo,
 	todoList, addTodo,
 	editTodo, doneEdit,
-	cancelEdit, vFocus
+	cancelEdit, vFocus,
+	remaining
 } = useTodoComposable()
 
 // Lifecycle hook to focus the ref in the input
@@ -36,7 +37,7 @@ const {
 <template>
   <!-- 🎵🎵🔲🔲◾☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰ -->
   <div class="todoListContainer">
-    <!-- Input -->
+    <!-- Input-top-container -->
 	  <input
 		  v-model="newTodo"
 		  @keyup.enter="addTodo"
@@ -45,7 +46,7 @@ const {
 		  placeholder="What needs to be done"
 	  >
 
-    <!-- For-loop(TodoList) -->
+    <!-- For-loop(TodoList)-container -->
 	  <div
 		  v-for="(todo, index) in (todoList)" :key="todo.id"
 		  class="todoItem"
@@ -90,11 +91,33 @@ const {
 			  </h1>
 		  </div>
 		
-		  <!-- removeTodo() -->
+		  <!-- removeTodo()-container -->
 		  <div class="removeItem" @click="removeTodo(index)">
 			  &times;
 		  </div>
 		  <!---->
+	  </div>
+	  
+	  <!-- checkAll-container -->
+	  <div>
+		  <div class="checkAllContainer">
+			  <!-- labeled checkAll inputButton-checkbox -->
+			  <label>
+				  <input
+					  class="inputCheckAll"
+					  type="checkbox"
+				  >
+				  <h1 class="checkAll">Check All</h1>
+			  </label>
+			  
+			  <!-- remaining-todos -->
+			  <div>
+				  <span class="remainingContainer">
+					  <span class="remaining">{{ remaining }}</span>
+					  items left
+				  </span>
+			  </div>
+		  </div>
 	  </div>
     <!---->
   </div>

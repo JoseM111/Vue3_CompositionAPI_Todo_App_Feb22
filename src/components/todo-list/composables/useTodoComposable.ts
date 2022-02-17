@@ -1,6 +1,6 @@
 /** useTodoComposable.ts */
 import { TodoType } from "../../../types/TodoType"
-import { reactive, ref } from "vue"
+import { computed, ComputedRef, reactive, ref } from "vue"
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
 
 export const useTodoComposable = () => {
@@ -24,6 +24,12 @@ export const useTodoComposable = () => {
       isEdited: false,
     },
   ])
+  
+  // computed: Will keep track of the length of todos but will remove
+  // from the length if the todo is completed.
+  const remaining: ComputedRef<number> = computed(() => {
+    return todoList.filter((todo: TodoType) => !todo.completed).length
+  })
   
   // Functions ====
   function addTodo() {
@@ -83,6 +89,7 @@ export const useTodoComposable = () => {
     editTodo, cancelEdit,
     doneEdit,
     vFocus: vFocus.mounted,
+    remaining
   }
 }
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
