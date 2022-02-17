@@ -1,6 +1,6 @@
 <!-- ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰ -->
 <script setup lang="ts">
-import TodoList from './components/Todo/TodoList.vue'
+import TodoList from './components/todo-list/TodoList.vue'
 </script>
 <!-- ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰ -->
 
@@ -22,7 +22,7 @@ import TodoList from './components/Todo/TodoList.vue'
 #app {
 	font-family: Iceland, sans-serif;
 	margin-top: 60px;
-	font-size: 18px;
+	font-size: 15px;
 }
 </style>
 <!-- ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰ -->

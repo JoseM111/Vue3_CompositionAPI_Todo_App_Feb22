@@ -1,5 +1,5 @@
-/** TodoList.composable.ts */
-import { TodoType } from "../../types/TodoType"
+/** useTodoComposable.ts */
+import { TodoType } from "../../../types/TodoType"
 import { reactive, ref } from "vue"
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
 
@@ -7,6 +7,7 @@ export const useTodoComposable = () => {
   
   const newTodo = ref<string>('')
   const idForTodo = ref<number>(3)
+  const beforeEditCachedTitle = ref<string>('')
   
   // Dummy-data
   const todoList: Array<TodoType> = reactive([
@@ -23,11 +24,6 @@ export const useTodoComposable = () => {
       isEdited: false,
     },
   ])
-  
-  // v-focus
-  const vFocus = {
-    mounted: (target: any) => target.focus()
-  }
   
   // Functions ====
   function addTodo() {
@@ -56,17 +52,36 @@ export const useTodoComposable = () => {
   }
   
   function editTodo(todo: TodoType) {
+    beforeEditCachedTitle.value = todo.title
     todo.isEdited = true
   }
   
-  function doneEdit(todo: TodoType) {
+  // Wont allow you to save a empty todo or edit
+  function cancelEdit(todo: TodoType) {
+    todo.title = beforeEditCachedTitle.value
     todo.isEdited = false
   }
   
+  function doneEdit(todo: TodoType) {
+  
+    if ( todo.title.trim() == '' ) {
+      todo.title = beforeEditCachedTitle.value
+    }
+    
+    todo.isEdited = false
+  }
+  
+  // v-focus global
+  const vFocus = {
+    mounted: (target: any) => target.focus()
+  }
+  
+  // #™━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   return {
     newTodo, removeTodo,
     todoList, addTodo,
-    editTodo, doneEdit,
+    editTodo, cancelEdit,
+    doneEdit,
     vFocus: vFocus.mounted,
   }
 }
