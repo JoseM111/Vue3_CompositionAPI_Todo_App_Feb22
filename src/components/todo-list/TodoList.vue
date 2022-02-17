@@ -1,8 +1,6 @@
 <!-- @TodoList -->
 <script lang="ts" setup>
-import { useFocus } from "@vueuse/core"
-import { ref } from "vue"
-import { useTodoComposable } from "./TodoList.composable"
+import { useTodoComposable } from "./composables/useTodoComposable"
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
 // const props = withDefaults(defineProps<Props>(), {  })
 
@@ -22,14 +20,12 @@ import { useTodoComposable } from "./TodoList.composable"
 // })
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
 // setup
-const inputFocus = ref()
-
 const {
-	newTodo, editTodo, todoList,
-	addTodo, removeTodo, doneEdit,
-	targetInput, vFocus
+	newTodo, removeTodo,
+	todoList, addTodo,
+	editTodo, doneEdit,
+	cancelEdit, vFocus
 } = useTodoComposable()
-
 
 // Lifecycle hook to focus the ref in the input
 
@@ -47,26 +43,36 @@ const {
 		  type="text"
 		  class="todoInput"
 		  placeholder="What needs to be done"
-		  v-focus
 	  >
 
     <!-- For-loop(TodoList) -->
 	  <div
-		  v-for="(todo, index) in todoList" :key="todo.id"
+		  v-for="(todo, index) in (todoList)" :key="todo.id"
 		  class="todoItem"
 	  >
 		  <div>
 			  <h1 style="cursor: pointer;">
 				  <span class="indexColor">
-					  {{ todo.id }}:
+					  {{ todo.id === 0 ? todo.id : index + 1 }}
 				  </span>
 				  <!---->
 				  <span class="todoItemLeft">
+					  <!-- input checkbox -->
+					  <input
+						  class="inputIsComplete"
+						  type="checkbox"
+						  v-model="todo.completed"
+						  checked
+					  >
+					  
 					  <!--# Beginning v-if #-->
 					  <span v-if="!todo.isEdited"
 					        @click="editTodo(todo)"
 					        class="todoItemLabel"
-					  >{{ todo.title }}
+					  >
+						  <span :class="{ isCompleted : todo.completed }">
+							  {{ todo.title }}
+						  </span>
 					  </span>
 					  <!-- input -->
 					  <input v-else
@@ -75,6 +81,7 @@ const {
 					         v-model="todo.title"
 					         @blur="doneEdit(todo)"
 					         @keyup.enter="doneEdit(todo)"
+					         @keyup.esc="cancelEdit(todo)"
 					         v-focus
 					  >
 					  <!--# End v-if #-->
@@ -96,6 +103,6 @@ const {
 <!-- ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰ -->
 
 <style lang="scss">
-@import 'TodoList.styles.scss';
+@import 'styles/TodoList.styles';
 </style>
 <!-- ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰ -->
