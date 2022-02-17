@@ -72,5 +72,56 @@
 .todoListContainer input.inputIsComplete:checked {
   box-shadow: inset 0 0 0 20px orangered;
 }
+.todoListContainer .checkAllContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid lightgrey;
+  padding-top: 14px;
+  margin-bottom: 14px;
+}
+.todoListContainer .checkAllContainer button {
+  font-size: 1.6rem;
+  background-color: white;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.todoListContainer .checkAllContainer button:hover {
+  background: cornflowerblue;
+}
+.todoListContainer .checkAllContainer button:focus {
+  outline: none;
+}
+.todoListContainer .checkAllContainer .active {
+  background: red;
+}
+.todoListContainer .checkAllContainer .remainingContainer {
+  font-size: 1.6rem;
+  color: cornflowerblue;
+}
+.todoListContainer .checkAllContainer .remainingContainer .remaining {
+  color: hotpink;
+}
+.todoListContainer .checkAllContainer .checkAll {
+  display: inline-block;
+  cursor: pointer;
+}
+.todoListContainer .checkAllContainer .inputCheckAll {
+  margin-left: 20px;
+  vertical-align: -8px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  transition: box-shadow 0.1s;
+  background: lightgrey;
+  border: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  margin-right: 15px;
+}
+.todoListContainer .checkAllContainer input.inputCheckAll:checked {
+  box-shadow: inset 0 0 0 20px orangered;
+}
 
 /*# sourceMappingURL=TodoList.styles.css.map */
