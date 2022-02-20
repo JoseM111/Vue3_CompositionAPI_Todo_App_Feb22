@@ -1,11 +1,13 @@
 <!-- ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰ -->
 <script setup lang="ts">
 import TodoList from './components/todo-list/TodoList.vue'
+import Image from './components/image/Image.vue'
 </script>
 <!-- ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰ -->
 
 <template>
 	<div id="app">
+		<Image />
 		<TodoList />
 	</div>
 	
