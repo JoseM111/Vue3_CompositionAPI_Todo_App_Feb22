@@ -22,14 +22,17 @@ import { useTodoComposable } from "./composables/useTodoComposable"
 // setup
 const {
 	newTodo, removeTodo,
-	todoList, addTodo,
+	addTodo,
 	editTodo, doneEdit,
 	cancelEdit, vFocus,
-	remaining
+	computedRemaining,
+	computedAnyRemaining,
+	computedCheckAllTodos,
+	filter, computedTodoListFiltered,
+	computedShowBtnClearCompleted,
 } = useTodoComposable()
 
 // Lifecycle hook to focus the ref in the input
-
 
 </script>
 <!-- ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰ -->
@@ -48,7 +51,7 @@ const {
 
     <!-- For-loop(TodoList)-container -->
 	  <div
-		  v-for="(todo, index) in (todoList)" :key="todo.id"
+		  v-for="(todo, index) in (computedTodoListFiltered)" :key="todo.id"
 		  class="todoItem"
 	  >
 		  <div>
@@ -65,7 +68,7 @@ const {
 						  v-model="todo.completed"
 						  checked
 					  >
-					  
+					
 					  <!--# Beginning v-if #-->
 					  <span v-if="!todo.isEdited"
 					        @click="editTodo(todo)"
@@ -97,8 +100,8 @@ const {
 		  </div>
 		  <!---->
 	  </div>
-	  
-	  <!-- checkAll-container -->
+
+    <!-- checkAll-container -->
 	  <div>
 		  <div class="checkAllContainer">
 			  <!-- labeled checkAll inputButton-checkbox -->
@@ -106,18 +109,47 @@ const {
 				  <input
 					  class="inputCheckAll"
 					  type="checkbox"
+					  :checked="!computedAnyRemaining"
+					  @change="computedCheckAllTodos"
 				  >
 				  <h1 class="checkAll">Check All</h1>
 			  </label>
-			  
-			  <!-- remaining-todos -->
+			
+			  <!-- computedRemaining-todos -->
 			  <div>
-				  <span class="remainingContainer">
-					  <span class="remaining">{{ remaining }}</span>
+				  <span class="extraContainer">
+					  <span class="computedRemaining">{{ computedRemaining }}</span>
 					  items left
 				  </span>
 			  </div>
 		  </div>
+	  </div>
+
+    <!-- filter-buttons -->
+	  <div class="checkAllContainer">
+		 <div>
+			 <!-- all-button -->
+			 <button
+				 class="buttonState"
+				 :class="{ active: filter === 'all' }"
+				 @click="filter = 'all'"
+			 >All
+			 </button>
+			 <!-- active-button -->
+			 <button
+				 class="buttonState"
+				 :class="{ active: filter === 'active' }"
+				 @click="filter = 'active'"
+			 >Active
+			 </button>
+			 <!-- completed-button -->
+			 <button
+				 class="buttonState"
+				 :class="{ active: filter === 'completed' }"
+				 @click="filter = 'completed'"
+			 >Completed
+			 </button>
+		 </div>
 	  </div>
     <!---->
   </div>
@@ -129,3 +161,20 @@ const {
 @import 'styles/TodoList.styles';
 </style>
 <!-- ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
